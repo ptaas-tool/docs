@@ -14,7 +14,6 @@ Gitlab or Github.
   - [Lint]()
   - [Test & Build]()
 - Docker
-  - [Build]()
   - [Deploy]()
   
 ### Gitlab
