@@ -22,8 +22,10 @@ Gitlab or Github.
   - [Test & Compile]()
   - [Build image]()
 - Docker
+  - [Build]()
   - [Release]()
 - Helm
+  - [Build]()
   - [Release]()
 - OpenShift
   - [Release]()
