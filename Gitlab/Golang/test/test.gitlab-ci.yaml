@@ -1,0 +1,12 @@
+test:
+  stage: test
+  extends:
+    - .golang-cache
+  image: "${GO_IMAGE}"
+  coverage: '/total:\s*\(statements\)\s*([\d.]+)%/'
+  script:
+    - chmod +x ./.gitlab/ci/scripts/test.sh
+    - ./.gitlab/ci/scripts/test.sh
+  cache:
+    policy: pull
+  allow_failure: true
