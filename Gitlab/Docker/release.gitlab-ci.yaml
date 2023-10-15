@@ -1,0 +1,19 @@
+---
+.release:
+  stage: release
+  image: docker:latest
+  variables:
+    REGISTRY_USERNAME: "gitlab-ci"
+  script:
+    - chmod +x ./.gitlab/ci/scripts/release.sh
+    - ./.gitlab/ci/scripts/release.sh
+  when: manual
+
+image:production:push:
+  extends: .release
+  only:
+    - tags
+  variables:
+    REGISTRY_ADDRESS: "${OKD_REGISTRY}"
+    PROJECT_NAMESPACE: "${PRODUCTION_NAMESPACE}"
+    REGISTRY_TOKEN: "${REGISTRY_PRODUCTION_TOKEN}"
