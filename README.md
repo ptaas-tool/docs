@@ -9,21 +9,22 @@ Gitlab or Github.
 
 ## content
 
-- Github
-  - Golang
-    - [Lint]()
-    - [Test & Build]()
-  - Docker
-    - [Build]()
-    - [Deploy]()
-- Gitlab
-  - Golang
-    - [Lint]()
-    - [Test & Compile]()
-    - [Build image]()
-  - Docker
-    - [Release]()
-  - Helm
-    - [Release]()
-  - OpenShift
-    - [Release]()
+### Github
+- Golang
+  - [Lint]()
+  - [Test & Build]()
+- Docker
+  - [Build]()
+  - [Deploy]()
+  
+### Gitlab
+- Golang
+  - [Lint]()
+  - [Test & Compile]()
+  - [Build image]()
+- Docker
+  - [Release]()
+- Helm
+  - [Release]()
+- OpenShift
+  - [Release]()
