@@ -10,22 +10,24 @@ Gitlab or Github.
 ## content
 
 ### Github
+
 - Golang
-  - [Lint]()
-  - [Test & Build]()
+  - [Lint](./Github/Golang/lint.yaml)
+  - [Test & Build](./Github/Golang/test-build.yaml)
 - Docker
-  - [Deploy]()
+  - [Deploy](./Github/Docker/docker.yaml)
   
 ### Gitlab
+
 - Golang
-  - [Lint]()
-  - [Test & Compile]()
-  - [Build image]()
+  - [Lint](./Gitlab/Golang/lint/)
+  - [Test](./Gitlab/Golang/test/)
+  - [Compite](./Gitlab/Golang/compile/)
+  - [Build image](./Gitlab/Docker/build.gitlab-ci.yaml)
 - Docker
-  - [Build]()
-  - [Release]()
+  - [Release](./Gitlab/Docker/release.gitlab-ci.yaml)
 - Helm
-  - [Build]()
-  - [Release]()
+  - [Build](./Gitlab/Helm/build.sh)
+  - [Release](./Gitlab/Helm/release.gitlab-ci.yaml)
 - OpenShift
-  - [Release]()
+  - [Release](./Gitlab/OpenShift/release.gitlab-ci.yaml)
