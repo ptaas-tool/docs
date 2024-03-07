@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="src/main.css" rel="stylesheet" type="text/css" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
         <title>
             PTaaS: Docs
         </title>
@@ -84,7 +84,7 @@
                     For installing the application using Docker, first make sure that you have <b>docker & docker-compose</b> command lines
                     installed on your machine. You may check <a href="https://docs.docker.com/engine/install/" target="_blank">this</a> link to install these dependencies.
                     Then use the following script in order to download the project deployment files and start the application:
-                    <pre class="bg-light px-3"><code class="language-bash">
+                    <pre class="bg-light px-3 my-3"><code class="language-bash bg-light">
 #!/bin/bash
 
 git clone https://github.com/ptaas-tool/deployments
@@ -105,7 +105,7 @@ cd deployments
                     </ul>
                     <br />
                     After that use the following script in order to start the application on a Kubernetes cluster.
-                    <pre class="bg-light px-3"><code class="language-bash">
+                    <pre class="bg-light px-3 my-3"><code class="language-bash bg-light">
 #!/bin/bash
 
 git clone https://github.com/ptaas-tool/deployments
@@ -117,8 +117,57 @@ helm install ptaa ptaas
                 <div class="h5">
                     Configs
                 </div>
+                <div class="mb-3">
+                    Application configs are written into <b>YAML</b> format. There are two base config files for this application. The
+                    base config and gatway configs which are as follow:
+                    <pre class="bg-light px-3 my-3"><code class="language-yml bg-light">
+core:
+    port: 9090
+    enable: true
+    workers: 1
+    secret: "#wercV89Qwerc09"
+mysql:
+    host: "mysql-container"
+    port: 3306
+    user: root
+    pass: "mauFJcuf5dhRMQrjj"
+    database: "ptaas"
+    migrate: true
+ai:
+    enable: false
+    method: "random"
+    limit: 10
+    factor: 7
+scanner:
+    enable: false
+    defaults:
+        - "2fa"
+    command: "python3 scanner.py"
+    flags:
+        - "host"
+        - "endpoints"
+        - "type"
+        - "protocol"
+migrate:
+    root: "admin"
+    pass: "12345"
+    enable: false
+ftp:
+    host: "http://ftp-server:9091"
+    secret: "8bVc13329vn23"
+    access: "nnvXiu%2234nvoo3n1i98n3v"
+                    </code></pre>
+                </div>
                 <div id="sec-usage" class="h3">
                     Usage
+                </div>
+                <div class="mb-3">
+                    Penetration testing as a service (PTaaS) is a form of cybersecurity service where organizations hire third-party security experts to conduct simulated attacks on their IT infrastructure, networks, applications, and other digital assets. The primary goal of penetration testing is to identify vulnerabilities and weaknesses in the organization's security defenses before malicious actors exploit them.
+The main objective of PTaaS is to assess the security posture of an organization's digital assets by simulating real-world cyberattacks. This helps identify vulnerabilities and weaknesses that could be exploited by attackers. PTaaS can include various types of penetration testing, including network penetration testing, web application penetration testing, mobile application penetration testing, wireless network penetration testing, and social engineering testing. <br /><br />
+Penetration testing typically follows a structured methodology that involves several phases, including reconnaissance, enumeration, vulnerability assessment, exploitation, and reporting. Security experts use a combination of automated tools and manual techniques to identify and exploit vulnerabilities. This approach ensures a thorough examination of the organization's security defenses.
+PTaaS offers several benefits to organizations. It helps identify vulnerabilities proactively, allowing organizations to address them before they are exploited by malicious actors, thus reducing the risk of data breaches and cyberattacks. Additionally, many regulatory standards and industry best practices require organizations to conduct regular penetration testing to ensure compliance with security requirements. Furthermore, penetration testing provides valuable insights into the effectiveness of an organization's security defenses, allowing them to improve their security posture. <br /><br />
+PTaaS can be offered through various engagement models, including one-time engagements, ongoing subscriptions, and customized engagements tailored to the organization's specific needs and requirements. Penetration testing results are typically documented in a detailed report that outlines the vulnerabilities discovered, the potential impact of these vulnerabilities, and recommendations for remediation. <br /><br />
+Despite its benefits, PTaaS may face challenges such as cost considerations, resource constraints, and the need for skilled cybersecurity professionals to perform the testing effectively. However, penetration testing as a service remains a valuable cybersecurity offering that helps organizations identify and mitigate security risks to protect their digital assets from cyber threats.
                 </div>
                 <div id="sec-components" class="h3">
                     Components
@@ -158,6 +207,7 @@ helm install ptaa ptaas
             2023-2024
         </div>
         <script src="src/script.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
     </body>
 </html>
