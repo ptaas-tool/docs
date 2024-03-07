@@ -10,6 +10,12 @@
     text-decoration: none;
 }
 
+pre {
+    border-radius: 5px;
+    padding: 0 !important;
+    background-color: #fff !important;
+}
+
 /* container and components */
 .x-container {
     inline-size: 100%;
