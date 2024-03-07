@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="x-container x-floating-container border-bottom">
-            <div class="p-15 border-end">
+            <div class="p-15 border-end" style="overflow: scroll;">
                 <ul>
                     <li>
                         <a href="#sec-installation">Installation</a>
@@ -175,17 +175,114 @@ Despite its benefits, PTaaS may face challenges such as cost considerations, res
                 <div id="sec-base-api" class="h4">
                     Base-API
                 </div>
+                <div class="mb-3">
+                    This is PTaaS base api system. In this service we use scanner, ftp server, and ml components to
+                    perform our penetration testing stages. In pkg/models directory we defined our base database modules
+                    and system modules to be used in all other system components.<br /><br />
+                    Base API docker image address:
+                    <pre class="bg-light px-3 my-3"><code class="language-bash bg-light">
+docker pull amirhossein21/ptaas-tool:base-v0.X.X
+                    </code></pre>
+                    Setup base API in docker container with following command:
+                    <pre class="bg-light px-3 my-3"><code class="language-bash bg-light">
+docker run -d \
+    -v type=bind,source=$(pwd)/config.yml,dest=/app/config.yml
+    -p 80:80 \
+    amirhossein21/ptaas-tool:base-v0.X.X
+                    </code></pre>
+                </div>
                 <div class="h5">
                     Database
+                </div>
+                <div class="mb-3">
+                    Application uses the latest version of <b>MySQL</b>. If you want to migrate the modules, just set the following
+                    configs in base-api config file:
+                    <pre class="bg-light px-3 my-3"><code class="language-yml bg-light">
+mysql:
+    host: "mysql-container"
+    port: 3306
+    user: root
+    pass: "mauFJcuf5dhRMQrjj"
+    database: "ptaas"
+    migrate: true
+migrate:
+    root: "admin"
+    pass: "12345"
+    enable: false
+                    </code></pre>
                 </div>
                 <div class="h5">
                     Scanner
                 </div>
+                <div class="mb-3">
+                    Open source tool to perform API security scan in PTaaS.
+                    This scanner uses nmap in order to get some details about our target. In this app, we get system information, critical issues, system vulnerabilities, and system dependencies. After that we return a list of possible vulnerabilities that might be used in a penetrating testing for that target.
+                    <pre class="bg-light px-3 my-3"><code class="language-bash bg-light">
+pip install -r requirements.txt
+python scanner.py --host webmail.aut.ac.ir
+                    </code></pre>
+                    Output:
+                    <pre class="bg-light px-3 my-3"><code class="language-json bg-light">
+[
+    {
+        "vuln": "injection",
+        "attacks": [ "sql injection", "graphql injection" ]
+        "path": [
+        "/docs/{doc-name}",
+        "/docs?sort_by={sorting-field}",
+        ],
+        "host" : {
+        "ip": "127.0.0.2",
+        "port": 8080
+        }
+    }
+]
+                    </code></pre>
+                </div>
                 <div class="h5">
                     ML
                 </div>
+                <div class="mb-3">
+                    Implementing a machine learning model in order to find the attacks that can be performed during a penetration testing by using analysis result data which consists of system vulnerabilities, bugs, and bad smells.
+                    In order to execute the model to see its results use the following command:
+                    <pre class="bg-light px-3 my-3"><code class="language-bash bg-light">
+jupyter nbconvert --execute ./notebook/analysis_data.ipynb
+                    </code></pre>
+                </div>
                 <div id="sec-gateway" class="h4">
                     Gateway
+                </div>
+                <div class="mb-3">
+                    Gateway is the PTaaS restful API for handling client http requests. This module handles the user interface logic in order to communicate with base-api and ftp-server. It is the system main gateway app.
+                    Setup gateway service in docker container with following command:
+                    <pre class="bg-light px-3 my-3"><code class="language-bash bg-light">
+docker run -d \
+    -v type=bind,source=$(pwd)/config.yaml,dest=/app/config.yaml \
+    -p 80:80 \
+    amirhossein21/ptaas-tool:gateway-v0.X.X
+                    </code></pre>
+                    Make sure to create config.yaml file with the following variable init:
+                    <pre class="bg-light px-3 my-3"><code class="language-yaml bg-light">
+http:
+    port: 8080
+    core: 'http://localhost:9090/api'
+    core_secret: 'secret'
+    dev_mode: true
+jwt:
+    private_key: 'super'
+    expire_time: 180 # minute
+mysql:
+    host: 'localhost'
+    port: 3306
+    user: root
+    pass: ''
+    database: 'apt'
+    migrate: false
+ftp:
+    host: 'http://localhost:9091'
+    secret: 'secret'
+    access: 'access'
+                    </code></pre>
                 </div>
                 <div id="sec-ftp" class="h4">
                     FTP-Server
