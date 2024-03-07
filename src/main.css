@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 
-a, a:visited, a:hover, a:active {
+.x-a, .x-a:visited, .x-a:hover, .x-a:active {
     color: inherit;
     text-decoration: none;
 }
