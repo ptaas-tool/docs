@@ -26,6 +26,10 @@ a, a:visited, a:hover, a:active {
     background-color: #e3734b!important;
 }
 
+.text-orange {
+    color: #e3734b!important;
+}
+
 /* padding and spaces */
 .p-15 {
     padding: 15px;
