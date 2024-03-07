@@ -172,6 +172,9 @@ Despite its benefits, PTaaS may face challenges such as cost considerations, res
                 <div id="sec-components" class="h3">
                     Components
                 </div>
+                <div class="mb-3">
+                    In the next sections we are going to check the four main parts of the system.
+                </div>
                 <div id="sec-base-api" class="h4">
                     Base-API
                 </div>
@@ -287,14 +290,72 @@ ftp:
                 <div id="sec-ftp" class="h4">
                     FTP-Server
                 </div>
+                <div class="mb-3">
+                    This is file manager component of our system. In this app we upload our attack scripts, we execute attack scripts, and we download the results. This system provides an interface in order to manage scripts and logs files from core app.
+                    Setup ftp server in docker container with following command:
+                    <pre class="bg-light px-3 my-3"><code class="language-bash bg-light">
+docker run -d \
+    -e HTTP_PORT=80 \
+    -p 80:80 \
+    amirhossein21/ptaas-tool:ftp-v0.X.X
+                    </code></pre>
+                    Env variables:<br /><br />
+                    <ul>
+                        <li>HTTP_PORT which is the system port</li>
+                        <li>ACCESS_KEY which is used to block download access for files</li>
+                        <li>PRIVATE_KEY which is used to give execute script system call enable only for core</li>
+                        <li>MINIO_CLUSTER is the minio configs. access:secret@endpoint&bucket&true</li>
+                    </ul>
+                </div>
                 <div class="h5">
                     Object Storage
+                </div>
+                <div class="mb-3">
+                    Application uses MinIO object storage for storing objects using S3 APIs.
                 </div>
                 <div class="h5">
                     Libatks
                 </div>
+                <div class="mb-3">
+                    Put your new attacks in libatks directory. If you add draf at the end, it will be ignored. Make sure to have only one main.go file for your attack with the following code in the beginning of the main function.
+                    <pre class="bg-light px-3 my-3"><code class="language-go bg-light">
+log.SetOutput(os.Stdout)
+
+var (
+    hostFlag      = flag.String("host", "localhost", "target host address")
+    endpointsFlag = flag.String("endpoints", "/", "target specific endpoints")
+    paramsFlag    = flag.String("params", "", "system parameters for testing")
+)
+
+flag.Parse()
+
+endpoints := strings.Split(*endpointsFlag, ",")
+paramSet := strings.Split(*paramsFlag, "&")
+
+params := make(map[string]string)
+
+for _, item := range paramSet {
+    parts := strings.Split(item, "=")
+    params[parts[0]] = parts[1]
+}
+
+log.Println(*hostFlag)
+log.Println(endpoints)
+log.Println(params)
+                    </code></pre>
+                </div>
                 <div id="sec-dashboard" class="h4">
                     Dashboard
+                </div>
+                <div class="mb-3">
+                    Automated penetration testing UI implemented by Vue.js framework. A user interface to use PTaaS application. In order to setup the user interface, first make sure to have gateway api, base api, and ftp server up and running. After that read the manuals to setup the ui app in your kubernetes cluster.
+                    Setup ui application in docker container with following command:
+                    <pre class="bg-light px-3 my-3"><code class="language-bash bg-light">
+docker run -d \
+    -v type=bind,source=$(pwd)/.env,dest=/app/.env \
+    -p 80:80 \
+    amirhossein21/ptaas-tool:dashboard-v0.X.X
+                    </code></pre>
                 </div>
             </div>
         </div>
