@@ -71,8 +71,20 @@
                 <div id="sec-installation" class="h3">
                     Installation
                 </div>
+                <div class="mb-3">
+                    In order to install this application, you can use docker or helm charts. Docker is useful when you want to install
+                    the application on a bare-metal or on your local system. However, charts are being used to install the application
+                    on a Kubernetes cluster.
+                </div>
                 <div id="sec-docker" class="h4">
                     Docker
+                </div>
+                <div class="mb-3">
+                    For installing the application using Docker, first make sure that you have <b>docker & docker-compose</b> command lines
+                    installed on your machine. Then use the following command:<br /><br />
+                    <pre>
+docker-compose up -d
+                    </pre>
                 </div>
                 <div id="sec-charts" class="h4">
                     Charts
