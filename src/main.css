@@ -11,6 +11,7 @@
 }
 
 pre {
+    font-size: 0.85em !important;
     border-radius: 5px;
     padding: 0 !important;
     background-color: #fff !important;

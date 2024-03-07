@@ -82,13 +82,37 @@
                 </div>
                 <div class="mb-3">
                     For installing the application using Docker, first make sure that you have <b>docker & docker-compose</b> command lines
-                    installed on your machine. Then use the following command:
-                    <pre class="bg-light px-5"><code class="language-bash">
-docker-compose up -d
+                    installed on your machine. You may check <a href="https://docs.docker.com/engine/install/" target="_blank">this</a> link to install these dependencies.
+                    Then use the following script in order to download the project deployment files and start the application:
+                    <pre class="bg-light px-3"><code class="language-bash">
+#!/bin/bash
+
+git clone https://github.com/ptaas-tool/deployments
+cd deployments
+
+# deploy the application
+./deploy.sh up ptaas
                     </code></pre>
                 </div>
                 <div id="sec-charts" class="h4">
                     Charts
+                </div>
+                <div class="mb-3">
+                    In order to use <b>Helm Charts</b>, first install the following dependencies on your machine:<br /><br />
+                    <ul>
+                        <li><a href="https://kubernetes.io/docs/tasks/tools/" target="_blank">Kubectl</a></li>
+                        <li><a href="https://helm.sh/docs/helm/helm_install/" target="_blank">Helm CLI</a></li>
+                    </ul>
+                    <br />
+                    After that use the following script in order to start the application on a Kubernetes cluster.
+                    <pre class="bg-light px-3"><code class="language-bash">
+#!/bin/bash
+
+git clone https://github.com/ptaas-tool/deployments
+
+# deploy the application
+helm install ptaa ptaas
+                    </code></pre>
                 </div>
                 <div class="h5">
                     Configs
